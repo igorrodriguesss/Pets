@@ -1,5 +1,6 @@
 const User = require('../models/Users')
 const bcrypt = require('bcrypt')
+const createUserToken = require('../middlewares/create-token-user')
 
 module.exports = class UserController {
     
@@ -46,8 +47,8 @@ module.exports = class UserController {
 
         // Inserindo usuário
         try {
-            const newUsers = await users.save()
-            res.status(201).json({message: "Usuário cadastrado com sucesso!"})
+            const newUser = await users.save()
+            await createUserToken(newUser, req, res)
         }catch(error) {
             res.status(500).json({message: error})
         }
