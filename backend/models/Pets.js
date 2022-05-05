@@ -1,4 +1,4 @@
-const conn = require('../connection/conn')
+const mongoose = require('../connection/conn')
 const { Schema } = require('mongoose')
 
 const Pet = mongoose.model(
